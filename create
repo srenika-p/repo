@@ -1,0 +1,10 @@
+printf("Enter empno, empname to be inserted in the employee table:\n");
+	scanf("%d",&empno);
+	scanf("%s",&empname);
+	EXEC SQL WHENEVER SQLERROR DO sql_error("ORACLE error\n");
+	EXEC SQL CONNECT :user IDENTIFIED BY :pwd;
+	EXEC SQL
+		INSERT INTO empl VALUES (:empno,:empname);
+	EXEC SQL COMMIT;
+	printf("\nThe value %d,%s is inserted\n", empno,empname);
+	return(0);
